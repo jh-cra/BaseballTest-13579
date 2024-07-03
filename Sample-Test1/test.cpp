@@ -31,5 +31,44 @@ TEST_F(BaseballFixture, Solved1) {
 	EXPECT_TRUE(result.solved);
 	EXPECT_EQ(3, result.strikes);
 	EXPECT_EQ(0, result.balls);
+}
 
+TEST_F(BaseballFixture, Guess1) {
+	GuessResult result = game.guess("129");
+
+	EXPECT_TRUE(!result.solved);
+	EXPECT_EQ(2, result.strikes);
+	EXPECT_EQ(0, result.balls);
+}
+
+TEST_F(BaseballFixture, Guess2) {
+	GuessResult result = game.guess("321");
+
+	EXPECT_TRUE(!result.solved);
+	EXPECT_EQ(1, result.strikes);
+	EXPECT_EQ(2, result.balls);
+}
+
+TEST_F(BaseballFixture, Guess3) {
+	GuessResult result = game.guess("132");
+
+	EXPECT_TRUE(!result.solved);
+	EXPECT_EQ(1, result.strikes);
+	EXPECT_EQ(2, result.balls);
+}
+
+TEST_F(BaseballFixture, Guess4) {
+	GuessResult result = game.guess("327");
+
+	EXPECT_TRUE(!result.solved);
+	EXPECT_EQ(1, result.strikes);
+	EXPECT_EQ(1, result.balls);
+}
+
+TEST_F(BaseballFixture, Guess5) {
+	GuessResult result = game.guess("536");
+
+	EXPECT_TRUE(!result.solved);
+	EXPECT_EQ(0, result.strikes);
+	EXPECT_EQ(1, result.balls);
 }
