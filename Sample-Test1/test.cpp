@@ -1,8 +1,11 @@
 #include "pch.h"
 #include "../BaseballTest/baseballTest.cpp"
 
+#include <string>
 
-TEST(TestCaseName, TestName) {
-  EXPECT_EQ(1, 1);
-  EXPECT_TRUE(true);
+using namespace std;
+
+TEST(BaseballTest, Exception1) {
+	Baseball game;
+	EXPECT_THROW(game.guess(string("12")), length_error);
 }
