@@ -22,6 +22,7 @@ public:
 TEST_F(BaseballFixture, Exception1) {
 	assertIllegalArgument("12");
 	assertIllegalArgument("12s");
+	assertIllegalArgument("121");
 }
 
 
