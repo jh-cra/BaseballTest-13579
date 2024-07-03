@@ -12,39 +12,54 @@ struct GuessResult {
 
 class Baseball {
 public:
-	Baseball(const string& question) : question(question) 	{
-	}
+	Baseball(const string& question) : question(question) {}
 
 	GuessResult guess(const string& guessNumber) {
 		assertIllegalArgument(guessNumber);
 
-		GuessResult result = { false, 0, 0 };
-
 		if (guessNumber == question) {
 			return { true, 3, 0 };
-		}
+		}		
 
-		for (int i = 0; i < 3; i++) {
-			if (guessNumber[i] == question[i]) result.strikes++;
-		}
+		return countStrikesAndBalls(guessNumber);
+	}
 
-		for (int i = 0; i < 3; i++) {
-			for (int b = 0; b < 3; b++) {
+	GuessResult countStrikesAndBalls(const std::string& guessNumber)
+	{
+		GuessResult result = { false, 0, 0 };
+		result.strikes = countStrikes(guessNumber);
+		result.balls = countBalls(guessNumber);
+		return result;
+	}
+
+	int countStrikes(const std::string& guessNumber)
+	{
+		int strikes = 0;
+		for (int i = 0; i < QUESTION_LENGTH; i++) {
+			if (guessNumber[i] == question[i]) strikes++;
+		}
+		return strikes;
+	}
+
+	int countBalls(const std::string& guessNumber)
+	{
+		int balls = 0;
+		for (int i = 0; i < QUESTION_LENGTH; i++) {
+			for (int b = 0; b < QUESTION_LENGTH; b++) {
 				if (guessNumber[i] == question[b]) {
 					if (i != b) {
-						result.balls++;
+						balls++;
 					}
 					break;
 				}
 			}
 		}
-
-		return result;
+		return balls;
 	}
 
 	void assertIllegalArgument(const std::string& guessNumber)
 	{
-		if (guessNumber.length() != 3) {
+		if (guessNumber.length() != QUESTION_LENGTH) {
 			throw length_error("Must be three letters.");
 		}
 
@@ -67,4 +82,5 @@ public:
 
 private:
 	string question;	
+	const int QUESTION_LENGTH = 3;
 };
