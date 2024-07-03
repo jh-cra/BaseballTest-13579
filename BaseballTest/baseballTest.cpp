@@ -44,10 +44,10 @@ public:
 	int countBalls(const std::string& guessNumber)
 	{
 		int balls = 0;
-		for (int i = 0; i < QUESTION_LENGTH; i++) {
-			for (int b = 0; b < QUESTION_LENGTH; b++) {
-				if (guessNumber[i] == question[b]) {
-					if (i != b) {
+		for (int guessIndex = 0; guessIndex < QUESTION_LENGTH; guessIndex++) {
+			for (int questionIndex = 0; questionIndex < QUESTION_LENGTH; questionIndex++) {
+				if (guessNumber[guessIndex] == question[questionIndex]) {
+					if (guessIndex != questionIndex) {
 						balls++;
 					}
 					break;
